@@ -8,7 +8,7 @@ import {
 } from "../types/messages";
 import type { JobPayload } from "../types/job";
 import type { JobAnalysis } from "../types/analysis";
-import type { AiProvider, ExtensionSettings } from "../types/storage";
+import type { AiProvider, ExtensionSettings, ResumeProfile } from "../types/storage";
 import { loadSettings, saveSettings } from "../storage/settings";
 import { listApplications, saveApplication, exportApplicationsJson } from "../storage/applications";
 import { saveResumePreviewPayload } from "../storage/resumePreview";
@@ -18,6 +18,7 @@ import {
   downloadResumePdf,
   triggerDownload,
 } from "../utils/exportResume";
+import { fetchBundledResume } from "../utils/bundledResume";
 
 function getActiveTabId(): Promise<number | undefined> {
   return new Promise((resolve) => {
@@ -60,6 +61,53 @@ export function App() {
     setSettings(next);
     await saveSettings(next);
   }, []);
+
+  /** First open: fill default resume from bundled Karthik/Muskan .txt when storage is empty. */
+  useEffect(() => {
+    if (!settings) return;
+    if (settings.resumeProfile === "custom") return;
+    if (settings.defaultResumeText.trim().length > 0) return;
+    if (settings.resumeProfile !== "karthik" && settings.resumeProfile !== "muskan") return;
+    let cancelled = false;
+    void (async () => {
+      const profile = settings.resumeProfile;
+      if (profile !== "karthik" && profile !== "muskan") return;
+      try {
+        const t = await fetchBundledResume(profile);
+        if (cancelled) return;
+        await persistSettings({ ...settings, defaultResumeText: t });
+        setStatus(`Loaded ${profile} resume from extension bundle.`);
+      } catch {
+        if (!cancelled) {
+          setStatus("Run npm run build so resumes copy to dist/resumes, then reload the extension.");
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [settings, persistSettings]);
+
+  const handleResumeProfileChange = useCallback(
+    async (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const v = e.target.value as ResumeProfile;
+      if (!settings) return;
+      setError(null);
+      if (v === "custom") {
+        await persistSettings({ ...settings, resumeProfile: "custom" });
+        setStatus("Custom — paste resume text or import a .txt file.");
+        return;
+      }
+      try {
+        const t = await fetchBundledResume(v);
+        await persistSettings({ ...settings, resumeProfile: v, defaultResumeText: t });
+        setStatus(`Loaded ${v} resume from bundle.`);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Could not load bundled resume.");
+      }
+    },
+    [settings, persistSettings]
+  );
 
   const handleExtract = useCallback(async () => {
     setError(null);
@@ -175,8 +223,8 @@ export function App() {
       const reader = new FileReader();
       reader.onload = () => {
         const text = typeof reader.result === "string" ? reader.result : "";
-        void persistSettings({ ...settings, defaultResumeText: text });
-        setStatus(`Imported ${file.name} into default resume.`);
+        void persistSettings({ ...settings, resumeProfile: "custom", defaultResumeText: text });
+        setStatus(`Imported ${file.name} — profile set to Custom.`);
       };
       reader.onerror = () => setError("Could not read file.");
       reader.readAsText(file);
@@ -299,10 +347,58 @@ export function App() {
                 void persistSettings({ ...settings, provider: e.target.value as AiProvider })
               }
             >
+              <option value="openrouter">OpenRouter (Qwen, free models, …)</option>
               <option value="anthropic">Anthropic (Claude)</option>
               <option value="openai">OpenAI</option>
             </select>
           </div>
+          {settings.provider === "openrouter" ? (
+            <>
+              <div>
+                <label htmlFor="ork">OpenRouter API key</label>
+                <input
+                  id="ork"
+                  type="password"
+                  autoComplete="off"
+                  placeholder="sk-or-v1-…"
+                  value={settings.openrouterApiKey}
+                  onChange={(e) => persistSettings({ ...settings, openrouterApiKey: e.target.value })}
+                />
+                <p className="small" style={{ marginTop: 4 }}>
+                  Get a key at{" "}
+                  <a href="https://openrouter.ai/keys" target="_blank" rel="noreferrer">
+                    openrouter.ai/keys
+                  </a>
+                  . Paste here — stored only in this browser. Switch the model below if a free tier runs out.
+                </p>
+              </div>
+              <div>
+                <label htmlFor="ormodel">Model id</label>
+                <input
+                  id="ormodel"
+                  type="text"
+                  list="openrouter-model-suggestions"
+                  value={settings.openrouterModel}
+                  onChange={(e) => persistSettings({ ...settings, openrouterModel: e.target.value })}
+                />
+                <datalist id="openrouter-model-suggestions">
+                  <option value="qwen/qwen2.5-7b-instruct:free" />
+                  <option value="qwen/qwen-2.5-7b-instruct:free" />
+                  <option value="google/gemma-2-9b-it:free" />
+                  <option value="meta-llama/llama-3.2-3b-instruct:free" />
+                  <option value="mistralai/mistral-7b-instruct:free" />
+                  <option value="huggingfaceh4/zephyr-7b-beta:free" />
+                </datalist>
+                <p className="small" style={{ marginTop: 4 }}>
+                  Free models often end with <code>:free</code>. Browse current IDs on{" "}
+                  <a href="https://openrouter.ai/models" target="_blank" rel="noreferrer">
+                    openrouter.ai/models
+                  </a>
+                  .
+                </p>
+              </div>
+            </>
+          ) : null}
           {settings.provider === "anthropic" ? (
             <>
               <div>
@@ -325,7 +421,8 @@ export function App() {
                 />
               </div>
             </>
-          ) : (
+          ) : null}
+          {settings.provider === "openai" ? (
             <>
               <div>
                 <label htmlFor="ok">OpenAI API key</label>
@@ -347,7 +444,24 @@ export function App() {
                 />
               </div>
             </>
-          )}
+          ) : null}
+          <div>
+            <label htmlFor="resumeProfile">Resume owner</label>
+            <select
+              id="resumeProfile"
+              value={settings.resumeProfile}
+              onChange={(e) => void handleResumeProfileChange(e)}
+            >
+              <option value="karthik">Karthik (bundled text)</option>
+              <option value="muskan">Muskan (bundled text)</option>
+              <option value="custom">Custom — paste or import .txt</option>
+            </select>
+            <p className="small" style={{ marginTop: 4 }}>
+              Karthik/Muskan use <code>resumes/karthik.txt</code> and <code>resumes/muskan.txt</code> from your build
+              (exported from PDF). Updating PDFs: edit paths in <code>scripts/extract-resumes.mjs</code>, run{" "}
+              <code>npm run extract-resumes</code>, then <code>npm run build</code>.
+            </p>
+          </div>
           <div>
             <label htmlFor="defaultResume">Default resume (full text — configurable)</label>
             <textarea
@@ -376,7 +490,10 @@ export function App() {
               >
                 Import .txt
               </button>
-              <span className="small">Use a .txt export for a stable import; PDF paste manually.</span>
+              <span className="small">
+                Import sets profile to Custom. PDFs: convert to .txt via{" "}
+                <code>npm run extract-resumes</code> (dev machine) or paste text here.
+              </span>
             </div>
           </div>
           <div>

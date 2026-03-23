@@ -1,0 +1,61 @@
+Muskan Markam
+muskanmarkam21mm@gmail.com — +91-9321491310
+linkedin.com/in/muskan-markam — github.com/muskanmarkam — greplus.com — aixrayassist.com — muskanmarkam.com —
+novareaders.com — cranium.com
+PROFESSIONAL SUMMARY
+Full-stack Software Engineer with 3+ years building scalable production systems. Led end-to-end development of 5+ appli-
+cations serving 5000+ users with React/Next.js, React Native, Spring Boot microservices, and cloud infrastructure. Strong
+background in system design, ML integration, and performance optimization.
+EDUCATION
+MCA Manipal University Jaipur CGPA: 9.13/10
+Apr 2024 - Jun 2026 (1/4 semesters)
+B.Sc. Radiology & Imaging Technology DY Patil University, Mumbai CGPA: 7.0/10
+Aug 2021 - Nov 2025
+PROFESSIONAL EXPERIENCE
+Web Developer
+AIBI Private Limited, Mumbai Jan 2024 - Sep 2024
+• Architected & deployed NGO platforms with donation flows, increasing digital reach by 40%+ through optimized Re-
+act/Next.js dashboards
+• Built MLA & builder portfolio websites; awarded Rs.1,00,000 for social impact contributions
+• Tech: React, Spring Boot, MongoDB Atlas, Docker, AWS, CI/CD pipelines
+Research Assistant
+Tata Memorial Hospital, Mumbai Jan 2023 - Dec 2023
+• Developed data visualization tools for cancer genomic datasets, improving clinician accessibility by 60%
+• Implemented secure web interfaces with role-based access control for medical data
+• Tech: React, D3.js, Python, MongoDB, Data pipelines
+Web Developer Intern
+Sigma Flux, Mumbai Jun 2022 - Dec 2022
+• Enhanced React/Next.js dashboards, increasing user engagement by 15% through performance optimization
+• Delivered prototypes reducing development cycle by 10%
+TECHNICAL SKILLS
+Languages: Java, JavaScript/TypeScript, Python
+Frontend: React, Next.js, React Native, HTML5/CSS3
+Backend: Spring Boot, REST APIs, Microservices
+Databases: MongoDB Atlas, SQL, Data Modeling
+Cloud/DevOps: AWS (EC2, S3, IAM), Docker, Nginx, CI/CD
+ML/AI: LLM routing, scikit-learn, Medical imaging pipelines
+KEY PROJECTS
+AIXRayAssist – AI X-ray Diagnostic Platform aixrayassist.com
+• Built human-in-the-loop AI assistant for radiology with encrypted storage & secure access controls
+• Deployed web & iOS (React Native) versions; generated 123 diagnostic reports in pilot testing
+• Implemented JWT/OAuth, encrypted image storage, and automated pre-processing pipelines
+Portfolio Analytics Website – AI Website Analytics & BI Platform muskanmarkam.com
+• Developed analytics engine scoring SEO, performance & usability with automated BI dashboards
+• Built ETL pipelines for web metrics & stakeholder reporting with real-time data processing
+• Implemented scalable data architecture supporting multiple client integrations
+GRE+ – Adaptive Learning Platform greplus.com
+• Designed adaptive learning app with data-driven personalization & subscription payments (Razorpay)
+• Acquired 5000+ visits, 120 active users, 15 paying users through community engagement
+• Implemented iOS in-app purchases, user analytics, and recommendation algorithms
+NovaReaders – Content Platform novareaders.com
+• Built reading/writing platform with integrated analytics for content strategy optimization
+• Implemented reading progress tracking, writer dashboards, and recommendation systems
+Cranium – Medical Practice Website cranium.com
+• Deployed doctor’s website with SEO improvements, increasing patient inquiries by 30% in 3 months
+• Implemented testimonial systems, service pages, and analytics tracking
+ACHIEVEMENTS
+• Published research: Loan Default Prediction and Financial Literacy Recommendation System (JETIR, 2023)
+• Led end-to-end development of 5+ production applications serving 5000+ users
+• Long-term volunteering: NIOS initiatives (2006-present), Cochlear Organization for hearing-impaired children
+
+-- 1 of 1 --

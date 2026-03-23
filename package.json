@@ -1,12 +1,13 @@
 {
   "name": "ai-job-assistant",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite build --watch & npm run build:extension -- --watch",
     "build": "vite build && npm run build:extension && node scripts/copy-manifest.mjs",
     "build:extension": "node scripts/build-extension.mjs",
+    "extract-resumes": "node scripts/extract-resumes.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
     "esbuild": "^0.24.0",
+    "pdf-parse": "^2.4.5",
     "typescript": "^5.6.3",
     "vite": "^5.4.10"
   }

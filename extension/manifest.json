@@ -1,12 +1,13 @@
 {
   "manifest_version": 3,
   "name": "AI Job Assistant",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Extract job descriptions, tailor resumes and answers with AI, and track applications locally.",
   "permissions": ["storage", "activeTab"],
   "host_permissions": [
     "https://api.openai.com/*",
-    "https://api.anthropic.com/*"
+    "https://api.anthropic.com/*",
+    "https://openrouter.ai/*"
   ],
   "action": {
     "default_popup": "popup.html",

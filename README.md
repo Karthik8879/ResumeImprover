@@ -14,7 +14,7 @@ npm install
 npm run build
 ```
 
-This runs Vite for the React **popup** and **preview** pages, esbuild for `background.js` and `content.js`, and copies `extension/manifest.json` into `dist/`.
+This runs Vite for the React **popup** and **preview** pages, esbuild for `background.js` and `content.js`, copies `extension/manifest.json`, and copies **`extension/resumes/` → `dist/resumes/`** (bundled resume text).
 
 ## Load unpacked in Chrome
 
@@ -27,9 +27,11 @@ This runs Vite for the React **popup** and **preview** pages, esbuild for `backg
 
 1. Click the extension icon to open the popup
 2. Expand **API & profile**
-3. Choose **Anthropic** or **OpenAI**, paste your API key, adjust the model id if needed
-4. Paste your **default resume (full plain text)** — or **Import .txt** — so the model can tailor a full resume per job (see `extension/default-resume.sample.txt` in the repo as a starting template)
-5. Optionally add **Extra notes** (targeting, keywords)
+3. Choose **OpenRouter** (default), **Anthropic**, or **OpenAI**. OpenRouter ships with a **built-in key** (you can still replace it in the popup). Pick a model id (often `…:free`); see [openrouter.ai/models](https://openrouter.ai/models).
+4. Choose **Resume owner**: **Karthik** or **Muskan** loads bundled text from `extension/resumes/*.txt` (copied to `dist/resumes` on build), or **Custom** to paste / **Import .txt**
+5. OpenRouter key is **built into the extension** for convenience; you can still override it in the popup. **Do not use a public repo** if the key or resume text must stay private
+6. To **refresh resumes from PDF** (paths in `scripts/extract-resumes.mjs`): `npm run extract-resumes` then `npm run build`
+7. Optionally add **Extra notes** (targeting, keywords)
 
 ## Use
 
@@ -43,7 +45,9 @@ This runs Vite for the React **popup** and **preview** pages, esbuild for `backg
 
 ## Security
 
-API keys are stored only in your browser (`chrome.storage.local`). Do not commit keys or built artifacts containing them.
+- A **default OpenRouter key** is embedded in source for personal use; anyone with the code can use it — **rotate the key** if the repo is public or shared.
+- Overrides are stored in **`chrome.storage.local`** when you type a key in the popup.
+- Bundled **resume .txt files contain personal data**; keep the repo **private** if needed.
 
 ## Development note
 

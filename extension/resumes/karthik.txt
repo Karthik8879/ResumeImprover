@@ -1,0 +1,63 @@
+KARTHIK SRIDHAR
+karthiksridhar8879@gmail.com — +91-7045883583
+linkedin.com/in/karthik-sridhar-16641920b — github.com/Karthik8879
+PROFESSIONAL SUMMARY
+Full-Stack Developer with 2+ years at Reliance Jio, specializing in Spring Boot, React, and scalable distributed systems.
+Proven expertise in microservices architecture, cost optimization, and AI-driven solutions with measurable impact on per-
+formance and cost reduction.
+EDUCATION
+B.Tech - Information Technology SIES Graduate School of Technology, Mumbai CGPA: 9.32/10
+April 2019 - April 2023
+PROFESSIONAL EXPERIENCE
+Software Development Engineer I
+Reliance Jio, Mumbai Oct 2023 - Present
+• Developed frontend features (meeting controls, chat, recording) for JioMeet Plus using React & custom SDKs, improving
+usability and reducing load times by 20%
+• Migrated video infrastructure from Agora to Jio’s in-house Media Engine, reducing latency by 25% and cutting licensing
+costs from 1.5 Cr/month to 50 L/month (65% savings)
+• Designed microservices-based scaling system, enabling auto-provisioning from 50 users/server to 5,000+ participants with
+25% lower infra costs
+• Implemented observability stack (Grafana + Prometheus) with real-time alerts and auto-termination, saving 30% in
+resource usage
+• Built CI/CD pipelines and resolved cross-service bottlenecks, reducing deployment cycles by 40% and improving large-
+scale meeting reliability
+• Architected distributed caching layer using Redis, improving API response times by 35% and reducing database load
+Web Developer Intern
+LTI Mindtree, Mumbai Jan 2023 - Mar 2023
+• Developed responsive web applications in HTML/CSS/JavaScript
+• Implemented cross-browser compatibility fixes and accessibility improvements
+Web Developer Intern
+Sigma Flux, Mumbai Apr 2022 - Sep 2022
+• Engineered React/Next.js dashboards and workflow automation tools
+• Implemented file upload systems, filtering workflows, and analytics modules
+Data Science Intern & Web Developer
+Tata Memorial Hospital, Mumbai Mar 2021 - Dec 2021
+• Conducted genomic data analysis for cancer research
+• Built secure web interfaces for dataset visualization
+TECHNICAL SKILLS
+Languages & Frameworks: Java, Spring Boot, JavaScript/TypeScript, React, Next.js, Python, Node.js
+Systems & Infrastructure: Docker, Kubernetes, Nginx, Grafana, Prometheus, Jenkins, GitHub Actions, Redis, Apache
+Kafka
+Databases & Tools: SQL, MongoDB Atlas, PostgreSQL, Tableau, Power BI, Elasticsearch
+Concepts: Software Architecture, Scalable Systems, Microservices, Distributed Computing, Cloud-Native Development,
+Agile, RESTful APIs, Event-Driven Architecture
+KEY PROJECTS
+AIX-RayAssist - AI X-ray Diagnostic Platform aixrayassist.com
+• Built secure, scalable AI-assisted diagnostic platform with Spring Boot APIs, MongoDB Atlas, and React Native frontend
+• Implemented quota-based LLM routing logic to distribute requests across multiple free-tier LLMs, maintaining service at
+near-zero cost
+• Deployed with Docker & Kubernetes; integrated encrypted image handling for HIPAA-aligned security
+AIHref - AI Website Analytics
+• Engineered automated site analysis pipeline (SEO, performance, best practices)
+• Designed multi-database architecture to balance read/write workloads and reduce infra costs
+• Built BI dashboards with Next.js + MongoDB; integrated LLMs for AI-based recommendations
+GRE+ - GRE Learning & Analytics Platform greplus.com
+• Developed subscription-based learning ecosystem with adaptive quizzes and personalized analytics
+• Integrated Razorpay + App Store subscriptions for monetization
+• Deployed with Docker + Nginx reverse proxy for cost-efficient scaling
+NovaReaders - Novel Reading & Writing Platform novareaders.com
+• Designed novel reading and writing platform with offline sync logic to minimize server requests and infra costs
+• Built scalable backend with Spring Boot + MongoDB and implemented analytics for content engagement
+• Web version live; mobile app in progress
+
+-- 1 of 1 --

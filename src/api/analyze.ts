@@ -2,6 +2,7 @@ import type { JobAnalysis } from "../types/analysis";
 import type { ExtensionSettings } from "../types/storage";
 import { analyzeWithAnthropic } from "./anthropic";
 import { analyzeWithOpenAI } from "./openai";
+import { analyzeWithOpenRouter } from "./openrouter";
 
 /**
  * Single entry: chooses provider from settings and returns structured analysis.
@@ -19,6 +20,17 @@ export async function analyzeJobDescription(
     return analyzeWithOpenAI({
       apiKey: settings.openaiApiKey,
       model: settings.openaiModel,
+      jobDescription,
+      defaultResumeText: defaultResume,
+      userProfileSummary: summary,
+      signal,
+    });
+  }
+
+  if (settings.provider === "openrouter") {
+    return analyzeWithOpenRouter({
+      apiKey: settings.openrouterApiKey ?? "",
+      model: settings.openrouterModel ?? "",
       jobDescription,
       defaultResumeText: defaultResume,
       userProfileSummary: summary,
