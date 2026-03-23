@@ -1,0 +1,19 @@
+YOUR NAME
+City, ST · email@example.com · linkedin.com/in/you
+
+SUMMARY
+One or two lines about your role focus and impact.
+
+EXPERIENCE
+Company Name — Job Title — 2022–Present
+• Led X that improved Y by Z% using [stack you actually used].
+• Collaborated with cross-functional teams on …
+
+Earlier Company — Role — 2019–2022
+• Shipped …
+
+EDUCATION
+Degree, University — Year
+
+SKILLS
+List tools and domains you truly know.
