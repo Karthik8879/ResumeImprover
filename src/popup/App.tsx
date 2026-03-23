@@ -28,6 +28,9 @@ function getActiveTabId(): Promise<number | undefined> {
   });
 }
 
+/** Free OpenRouter models + large resume/JD can exceed 2+ minutes; keep popup open until done. */
+const ANALYZE_TIMEOUT_MS = 8 * 60 * 1000;
+
 async function sendToContent<T>(tabId: number, msg: unknown): Promise<T> {
   return new Promise((resolve, reject) => {
     chrome.tabs.sendMessage(tabId, msg, (response) => {
@@ -144,19 +147,24 @@ export function App() {
     setLoading(true);
     setAnalysis(null);
     const ac = new AbortController();
-    const t = window.setTimeout(() => ac.abort(), 120_000);
+    const t = window.setTimeout(() => ac.abort(), ANALYZE_TIMEOUT_MS);
     try {
       const text = jdForAnalyze;
       if (!text) {
         setError("Load a job page or paste a job description first.");
         return;
       }
+      setStatus("Calling AI… keep this popup open (free models can take several minutes).");
       const result = await analyzeJobDescription(text, settings, ac.signal);
       setAnalysis(result);
       setStatus("Analysis ready — review and edit before submitting anywhere.");
     } catch (e) {
       if (e instanceof Error && e.name === "AbortError") {
-        setError("Request timed out.");
+        const mins = Math.round(ANALYZE_TIMEOUT_MS / 60000);
+        setError(
+          `Request timed out after ${mins} minutes. Free OpenRouter models are often slow with long resumes + job descriptions. ` +
+            `Try: shorten the pasted JD or default resume, trim “Extra notes”, pick a faster model id, or run Analyze again and leave the popup open.`
+        );
       } else {
         setError(e instanceof Error ? e.message : "Analysis failed.");
       }
