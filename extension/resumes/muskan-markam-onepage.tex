@@ -1,0 +1,148 @@
+% One-page A4 reference résumé (curated for single-page compile).
+% Build: pdflatex muskan-markam-onepage.tex
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.35in]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{tabularx}
+
+\pagestyle{empty}
+
+\definecolor{primary}{RGB}{0, 102, 204}
+\definecolor{secondary}{RGB}{51, 51, 51}
+
+\titleformat{\section}{\fontsize{9.5}{11}\selectfont\bfseries\color{primary}}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\fontsize{8.5}{10}\selectfont\bfseries\color{secondary}}{}{0em}{}
+
+\titlespacing*{\section}{0pt}{1pt}{0pt}
+\titlespacing*{\subsection}{0pt}{0pt}{0pt}
+
+\setlist[itemize]{leftmargin=*,topsep=-3pt,itemsep=0pt,parsep=0pt,partopsep=0pt}
+
+\setlength{\parindent}{0pt}
+
+\newcommand{\rupee}{Rs.}
+
+\newcommand{\header}[3]{
+    \begin{center}
+        {\fontsize{13}{15}\selectfont\bfseries\color{primary} #1}\\[0pt]
+        {\fontsize{8.5}{10}\selectfont #2}\\[0pt]
+        {\fontsize{8.5}{10}\selectfont #3}
+    \end{center}
+    \vspace{-2pt}
+}
+
+\newcommand{\experience}[4]{
+    \subsection{#1}
+    \textbf{#2} \hfill {\fontsize{9}{10}\selectfont\itshape #3}\\
+    \vspace{-10pt}
+    #4
+}
+
+\newcommand{\project}[3]{
+    \subsection{#1 \hfill \textcolor{primary}{\textbf{#2}}}
+    \vspace{-2pt}
+    #3
+}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primary,
+    urlcolor=primary,
+    citecolor=primary
+}
+
+\pdfstringdefDisableCommands{%
+    \def\hfill{ }%
+}
+
+\begin{document}
+\fontsize{9.5}{11}\selectfont
+
+\header{Muskan Markam}{muskanmarkam21mm@gmail.com | +91-9321491310}{\href{https://www.linkedin.com/in/muskan-markam}{linkedin.com/in/muskan-markam} | \href{https://github.com/muskanmarkam}{github.com/muskanmarkam}\\\href{https://greplus.com}{greplus.com} | \href{https://aixrayassist.com}{aixrayassist.com} | \href{https://muskanmarkam.com}{muskanmarkam.com}}
+
+\section{PROFESSIONAL SUMMARY}
+\vspace{2pt}
+Full-stack engineer with 3+ years shipping production systems; led 5+ apps for 5000+ users using React/Next.js, React Native, Spring Boot, and cloud. Strong in system design, ML integration, and performance.
+
+\section{EDUCATION}
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{@{}X X r@{}}
+    \textbf{MCA} & Manipal University Jaipur & \textbf{CGPA: 9.13/10}\\
+    {\fontsize{9}{10}\selectfont\itshape Apr 2024 - Jun 2026} & & \\
+    \textbf{B.Sc. Radiology \& Imaging Technology} & DY Patil University, Mumbai & \textbf{CGPA: 7.0/10}\\
+    {\fontsize{9}{10}\selectfont\itshape Aug 2021 - Nov 2025} & & \\
+\end{tabularx}
+
+\section{PROFESSIONAL EXPERIENCE}
+\vspace{2pt}
+\experience{Web Developer}{AIBI Private Limited, Mumbai}{Jan 2024 - Sep 2024}{
+\begin{itemize}
+    \item NGO donation platforms in React/Next.js; digital reach up \textbf{40\%+}
+    \item MLA/builder sites; \textbf{\rupee{}1,00,000} award for social impact
+    \item Stack: React, Spring Boot, MongoDB Atlas, Docker, AWS, CI/CD
+\end{itemize}
+}
+
+\vspace{3pt}
+\experience{Research Assistant}{Tata Memorial Hospital, Mumbai}{Jan 2023 - Dec 2023}{
+\begin{itemize}
+    \item Genomic data viz for clinicians; accessibility up \textbf{60\%}
+    \item Secure RBAC web UIs for medical data (React, D3.js, Python, MongoDB)
+\end{itemize}
+}
+
+\vspace{3pt}
+\experience{Web Developer Intern}{Sigma Flux, Mumbai}{Jun 2022 - Dec 2022}{
+\begin{itemize}
+    \item React/Next.js dashboards; engagement up \textbf{15\%} via performance work
+    \item Prototypes cut dev cycle \textbf{10\%}
+\end{itemize}
+}
+
+\section{TECHNICAL SKILLS}
+\vspace{2pt}
+\textbf{Languages / Frontend:} Java, JavaScript/TypeScript, Python; React, Next.js, React Native, HTML5/CSS3\\
+\textbf{Backend / Data:} Spring Boot, REST, microservices; MongoDB Atlas, SQL, modeling\\
+\textbf{Cloud / DevOps:} AWS (EC2, S3, IAM), Docker, Nginx, CI/CD\\
+\textbf{ML/AI:} LLM routing, scikit-learn, medical imaging pipelines
+
+\section{KEY PROJECTS}
+\vspace{2pt}
+\project{AIXRayAssist -- AI X-ray Diagnostic Platform}{\href{https://aixrayassist.com}{aixrayassist.com}}{
+\begin{itemize}
+    \item Human-in-the-loop radiology assistant; encrypted storage and access controls
+    \item Web + iOS (React Native); \textbf{123} diagnostic reports in pilot; JWT/OAuth and image pipelines
+\end{itemize}
+}
+
+\vspace{3pt}
+\project{GRE+ -- Adaptive Learning Platform}{\href{https://greplus.com}{greplus.com}}{
+\begin{itemize}
+    \item Adaptive app with personalization and Razorpay subscriptions
+    \item \textbf{5000+} visits, \textbf{120} active users, \textbf{15} paying; iOS IAPs and recommendations
+\end{itemize}
+}
+
+\vspace{3pt}
+\project{Portfolio Analytics -- AI Website Analytics \& BI}{\href{https://muskanmarkam.com}{muskanmarkam.com}}{
+\begin{itemize}
+    \item SEO/performance/usability scoring with BI dashboards and ETL for metrics
+    \item Scalable multi-client data architecture
+\end{itemize}
+}
+
+\section{ACHIEVEMENTS}
+\vspace{2pt}
+\begin{itemize}
+    \item Published: \textit{Loan Default Prediction and Financial Literacy Recommendation System} (JETIR, 2023)
+    \item Shipped 5+ production apps serving 5000+ users end-to-end
+    \item Volunteering: NIOS (2006--present); Cochlear Org.\ for hearing-impaired children
+\end{itemize}
+
+\end{document}

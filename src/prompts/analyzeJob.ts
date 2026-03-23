@@ -1,5 +1,5 @@
 /** Version tag for debugging prompt iterations. */
-export const PROMPT_VERSION = "v2";
+export const PROMPT_VERSION = "v3";
 
 const SYSTEM = `You are an expert career coach helping a candidate apply to a specific job.
 You must output valid JSON only, with no markdown fences or commentary.
@@ -30,7 +30,7 @@ export function buildAnalyzeUserMessage(
 {
   "matchScore": number from 0-100 estimating fit given the resume and JD,
   "resumeBullets": string array of 4-6 tailored resume bullet points (each <= 2 short sentences, start with strong verbs),
-  "tailoredResumeFullText": string, the full resume as plain text suitable for PDF export (sections, line breaks; same facts as default resume but JD-aligned phrasing),
+  "tailoredResumeFullText": string, plain text for one-page A4 LaTeX export: line 1 = full name; contact lines (email/phone first; keep links concise — prefer LinkedIn, GitHub, and top 2–3 project URLs only); ALL CAPS sections PROFESSIONAL SUMMARY (short paragraph), EDUCATION, PROFESSIONAL EXPERIENCE, TECHNICAL SKILLS, KEY PROJECTS, ACHIEVEMENTS; EXPERIENCE = job title line, company line, date line, then max 2–3 tight bullets per role (impact-first, minimal filler); PROJECTS = at most 3 strongest projects, each with title line (use -- in title), URL line, max 2 bullets; SKILLS = merge into at most 4 lines (e.g. Languages/Frontend, Backend/Data, Cloud/DevOps, ML/AI); omit low-value education notes; same facts as default resume but JD-aligned and concise,
   "answers": {
     "whyHire": string, answer to "Why should we hire you?" (120-180 words max),
     "relevantExperience": string, focused relevant experience narrative (120-180 words max),

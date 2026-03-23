@@ -141,9 +141,310 @@ button:disabled {
   background: #222;
 }
 
+.resume-output-panel .pdf-frame {
+  min-height: 280px;
+  border-top: 1px solid var(--border);
+}
+
 .hint {
   font-size: 12px;
   color: var(--muted);
   margin-top: 8px;
   line-height: 1.4;
+}
+
+/* —— Resume: matched to Muskan_Markam_Resume_2026 PDF (CM / pdflatex metrics) —— */
+.resume-layout {
+  align-items: stretch;
+}
+
+.resume-output-panel {
+  min-height: 70vh;
+}
+
+.panel-subheading {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin: 0;
+  padding: 8px 12px 0;
+  border-top: 1px solid var(--border);
+}
+
+.resume-preview-outer {
+  flex: 1;
+  min-height: 220px;
+  max-height: min(52vh, 560px);
+  overflow: auto;
+  padding: 16px;
+  background: #dfe4ea;
+  color-scheme: light;
+}
+
+.resume-preview-root {
+  max-width: 210mm;
+  margin: 0 auto;
+}
+
+/* A4 + geometry margin=0.35in; matches LaTeX \\fontsize{9.5}{11} body + explicit type scale */
+.resume-preview-root .resume-sheet.resume-sheet--muskan {
+  box-sizing: border-box;
+  width: 210mm;
+  max-width: 100%;
+  background: #fff;
+  color: #333;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 0.35in;
+  font-family: "STIX Two Text", "Times New Roman", Times, serif;
+  font-size: 9.5pt;
+  line-height: calc(11 / 9.5);
+  text-align: left;
+}
+
+/* template \\header — centered; \\vspace{-2pt} after block */
+.resume-preview-root .resume-sheet--muskan .resume-name,
+.resume-preview-root .resume-sheet--muskan .resume-contact-block {
+  text-align: center;
+}
+
+/* LaTeX name: \\fontsize{13}{15}\\selectfont\\bfseries */
+.resume-preview-root .resume-sheet--muskan .resume-name {
+  font-size: 13pt;
+  font-weight: 700;
+  margin: 0 0 1px;
+  line-height: calc(15 / 13);
+  color: rgb(0, 102, 204);
+}
+
+.resume-preview-root .resume-sheet--muskan .resume-contact-block {
+  margin: 0 0 -2px;
+}
+
+/* \\fontsize{8.5}{10} contact lines */
+.resume-preview-root .resume-sheet--muskan .resume-contact {
+  font-size: 8.5pt;
+  font-weight: 400;
+  margin: 0;
+  line-height: calc(10 / 8.5);
+}
+
+.resume-preview-root .resume-contact:last-child {
+  margin-bottom: 0;
+}
+
+/* \\fontsize{9.5}{11}\\selectfont\\bfseries section + titlerule */
+.resume-preview-root .resume-sheet--muskan .resume-section-title {
+  font-size: 9.5pt;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  margin: 0.35em 0 0;
+  padding: 0 0 1px;
+  border-bottom: 0.4pt solid rgb(0, 102, 204);
+  line-height: calc(11 / 9.5);
+  color: rgb(0, 102, 204);
+}
+
+.resume-preview-root .resume-sheet--muskan .resume-section-title:first-of-type {
+  margin-top: 0.15em;
+}
+
+/* \\vspace{5pt} after \\section — first line of content */
+.resume-preview-root .resume-sheet--muskan .resume-section-title + * {
+  margin-top: 5pt;
+}
+
+/* Body text: \\fontsize{9.5}{11}\\selectfont */
+.resume-preview-root .resume-sheet--muskan .resume-summary-line,
+.resume-preview-root .resume-sheet--muskan .resume-line {
+  font-size: 9.5pt;
+  font-weight: 400;
+  margin: 0;
+  line-height: calc(11 / 9.5);
+}
+
+/* \\subsection: \\fontsize{8.5}{10}\\selectfont\\bfseries */
+.resume-preview-root .resume-sheet--muskan .resume-job-title {
+  font-size: 8.5pt;
+  font-weight: 700;
+  margin: 0;
+  line-height: calc(10 / 8.5);
+  color: rgb(51, 51, 51);
+}
+
+/* Company bold at body size; dates \\fontsize{9}{10}\\itshape */
+.resume-preview-root .resume-sheet--muskan .resume-company-dates-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0;
+  font-size: 9.5pt;
+  line-height: calc(11 / 9.5);
+}
+
+.resume-preview-root .resume-sheet--muskan .resume-company-dates-row .resume-company {
+  font-weight: 700;
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.resume-preview-root .resume-sheet--muskan .resume-company-dates-row .resume-dates {
+  font-size: 9pt;
+  font-style: italic;
+  font-weight: 400;
+  margin: 0;
+  flex-shrink: 0;
+  text-align: right;
+  line-height: calc(10 / 9);
+}
+
+/* Fallback single-line company / dates (education, etc.) */
+.resume-preview-root .resume-company {
+  font-size: 9.5pt;
+  font-weight: 700;
+  margin: 0 0 0.02rem;
+  line-height: calc(11 / 9.5);
+}
+
+.resume-preview-root .resume-dates {
+  font-size: 9pt;
+  font-weight: 400;
+  font-style: italic;
+  margin: 0 0 0.06rem;
+  line-height: calc(10 / 9);
+}
+
+/* \\vspace{-12pt} before experience itemize */
+.resume-preview-root .resume-sheet--muskan .resume-company-dates-row + .resume-bullets {
+  margin-top: -9px;
+}
+
+.resume-preview-root .resume-sheet--muskan .resume-job-title + .resume-company-dates-row {
+  margin-top: -1px;
+}
+
+/* Education — tabular density */
+.resume-preview-root .resume-sheet--muskan .resume-degree-line,
+.resume-preview-root .resume-sheet--muskan .resume-school-line,
+.resume-preview-root .resume-sheet--muskan .resume-cgpa-line,
+.resume-preview-root .resume-sheet--muskan .resume-edu-note {
+  font-size: 9.5pt;
+  margin: 0;
+  line-height: calc(11 / 9.5);
+}
+
+.resume-preview-root .resume-sheet--muskan .resume-degree-line,
+.resume-preview-root .resume-sheet--muskan .resume-cgpa-line {
+  font-weight: 700;
+}
+
+.resume-preview-root .resume-sheet--muskan .resume-school-line,
+.resume-preview-root .resume-sheet--muskan .resume-edu-note {
+  font-weight: 400;
+}
+
+/* \\project row uses \\subsection font (8.5/10) */
+.resume-preview-root .resume-sheet--muskan .resume-project-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+  font-size: 8.5pt;
+  line-height: calc(10 / 8.5);
+}
+
+.resume-preview-root .resume-sheet--muskan .resume-project-row .resume-project-title {
+  font-weight: 700;
+  color: rgb(51, 51, 51);
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+.resume-preview-root .resume-sheet--muskan .resume-project-row .resume-project-url {
+  font-weight: 700;
+  color: rgb(0, 102, 204);
+  flex-shrink: 0;
+  margin: 0;
+  text-align: right;
+}
+
+.resume-preview-root .resume-sheet--muskan .resume-project-title--solo {
+  font-size: 8.5pt;
+  font-weight: 700;
+  margin: 0;
+  color: rgb(51, 51, 51);
+}
+
+/* Standalone URL line (no paired title) */
+.resume-preview-root .resume-sheet--muskan p.resume-project-url {
+  font-size: 8.5pt;
+  font-weight: 700;
+  margin: 0;
+  color: rgb(0, 102, 204);
+}
+
+/* \\vspace{-3pt} before project itemize */
+.resume-preview-root .resume-sheet--muskan .resume-project-row + .resume-bullets {
+  margin-top: -4px;
+}
+
+/* \\vspace{5pt} between project blocks */
+.resume-preview-root .resume-sheet--muskan .resume-bullets + .resume-project-row {
+  margin-top: 5pt;
+}
+
+/* Skills — body size */
+.resume-preview-root .resume-sheet--muskan .resume-skill-line {
+  font-size: 9.5pt;
+  margin: 0;
+  line-height: calc(11 / 9.5);
+}
+
+.resume-preview-root .resume-skill-label {
+  font-weight: 700;
+}
+
+.resume-preview-root .resume-skill-value {
+  font-weight: 400;
+}
+
+/* enumitem: topsep=-2pt, itemsep=0, parsep=0, leftmargin=* */
+.resume-preview-root .resume-sheet--muskan .resume-bullets {
+  margin: -2px 0 3px 1em;
+  padding: 0;
+  list-style: disc;
+  font-size: 9.5pt;
+}
+
+.resume-preview-root .resume-sheet--muskan .resume-bullets li {
+  margin: 0;
+  padding-left: 0.08rem;
+  line-height: 1.12;
+}
+
+/* \\vspace{7pt} between jobs — extra gap before next job title */
+.resume-preview-root .resume-sheet--muskan .resume-bullets + .resume-job-title {
+  margin-top: 7pt;
+}
+
+.resume-preview-root .resume-empty {
+  margin: 0;
+  color: #64748b;
+}
+
+.pdf-placeholder {
+  flex: 1;
+  min-height: 200px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
 }

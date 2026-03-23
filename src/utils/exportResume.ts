@@ -26,6 +26,10 @@ export function buildResumeMarkdown(bullets: string[], title?: string, company?:
 
 export function triggerDownload(filename: string, mime: string, body: string) {
   const blob = new Blob([body], { type: mime });
+  triggerDownloadBlob(filename, blob);
+}
+
+export function triggerDownloadBlob(filename: string, blob: Blob) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
