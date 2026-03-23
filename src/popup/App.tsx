@@ -382,17 +382,20 @@ export function App() {
                   onChange={(e) => persistSettings({ ...settings, openrouterModel: e.target.value })}
                 />
                 <datalist id="openrouter-model-suggestions">
-                  <option value="qwen/qwen2.5-7b-instruct:free" />
-                  <option value="qwen/qwen-2.5-7b-instruct:free" />
+                  <option value="openrouter/free" />
+                  <option value="nvidia/nemotron-3-super-120b-a12b:free" />
+                  <option value="minimax/minimax-m2.5:free" />
+                  <option value="stepfun/step-3.5-flash:free" />
+                  <option value="arcee-ai/trinity-large-preview:free" />
                   <option value="google/gemma-2-9b-it:free" />
                   <option value="meta-llama/llama-3.2-3b-instruct:free" />
                   <option value="mistralai/mistral-7b-instruct:free" />
                   <option value="huggingfaceh4/zephyr-7b-beta:free" />
                 </datalist>
                 <p className="small" style={{ marginTop: 4 }}>
-                  Free models often end with <code>:free</code>. Browse current IDs on{" "}
-                  <a href="https://openrouter.ai/models" target="_blank" rel="noreferrer">
-                    openrouter.ai/models
+                  Prefer <code>openrouter/free</code> if specific <code>:free</code> models show “no endpoints”. Browse{" "}
+                  <a href="https://openrouter.ai/models?free=true" target="_blank" rel="noreferrer">
+                    free models
                   </a>
                   .
                 </p>

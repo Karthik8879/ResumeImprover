@@ -50,6 +50,13 @@ export async function analyzeWithOpenRouter(params: {
       signal,
     });
 
+  const invalidModelHint =
+    "OpenRouter: that model id is not recognized. Set Model id to `openrouter/free` (built-in router that picks an available free model) or copy an exact id from https://openrouter.ai/models?free=true";
+
+  const noEndpointsHint =
+    "OpenRouter: no provider is serving that model right now (often happens with individual `:free` slugs). " +
+    "Set Model id to `openrouter/free` — OpenRouter will route to a working free model. Alternatives: `nvidia/nemotron-3-super-120b-a12b:free`, `minimax/minimax-m2.5:free` (check https://openrouter.ai/models?free=true ).";
+
   const explainOpenRouterFailure = (status: number, bodySnippet: string): string => {
     if (status === 401) {
       return (
@@ -58,6 +65,12 @@ export async function analyzeWithOpenRouter(params: {
         "paste it into the extension under “OpenRouter API key”, then try Analyze again. " +
         "If you pasted an old or leaked key, revoke it on the Keys page."
       );
+    }
+    if (status === 400 && /not a valid model/i.test(bodySnippet)) {
+      return invalidModelHint;
+    }
+    if (status === 404 && /no endpoints found/i.test(bodySnippet)) {
+      return noEndpointsHint;
     }
     return `OpenRouter HTTP ${status}: ${bodySnippet.slice(0, 220)}`;
   };
@@ -75,6 +88,13 @@ export async function analyzeWithOpenRouter(params: {
     if (res.status === 401) {
       throw new Error(explainOpenRouterFailure(401, errFirst));
     }
+    // Bad model id — second request will fail the same way
+    if (res.status === 400 && /not a valid model/i.test(errFirst)) {
+      throw new Error(explainOpenRouterFailure(400, errFirst));
+    }
+    if (res.status === 404 && /no endpoints found/i.test(errFirst)) {
+      throw new Error(explainOpenRouterFailure(404, errFirst));
+    }
     // Many free-tier models reject json_object; retry without it
     res = await post({
       model: model.trim(),
@@ -85,6 +105,12 @@ export async function analyzeWithOpenRouter(params: {
       const errSecond = await res.text().catch(() => "");
       if (res.status === 401) {
         throw new Error(explainOpenRouterFailure(401, errSecond));
+      }
+      if (res.status === 400 && /not a valid model/i.test(errSecond)) {
+        throw new Error(explainOpenRouterFailure(400, errSecond));
+      }
+      if (res.status === 404 && /no endpoints found/i.test(errSecond)) {
+        throw new Error(explainOpenRouterFailure(404, errSecond));
       }
       throw new Error(
         `OpenRouter error: ${errFirst.slice(0, 180)}${errSecond ? ` | retry: ${errSecond.slice(0, 180)}` : ""}`

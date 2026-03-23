@@ -14,7 +14,7 @@ export type ExtensionSettings = {
   anthropicModel: string;
   /** https://openrouter.ai — one key accesses many models (paste key in the popup; never commit it). */
   openrouterApiKey: string;
-  /** e.g. qwen/qwen2.5-7b-instruct:free — change when a free model hits limits */
+  /** Use `openrouter/free` to auto-route to an available free model, or a specific id from openrouter.ai/models */
   openrouterModel: string;
   /**
    * Full default resume as plain text (paste from PDF/Word or import .txt).
@@ -34,7 +34,7 @@ export const DEFAULT_SETTINGS: ExtensionSettings = {
   anthropicModel: "claude-3-5-sonnet-20241022",
   openrouterApiKey: "",
   // Default to a Qwen free-tier slug; browse https://openrouter.ai/models?q=free for current IDs
-  openrouterModel: "qwen/qwen2.5-7b-instruct:free",
+  openrouterModel: "openrouter/free",
   defaultResumeText: "",
   userProfileSummary: "",
   resumeProfile: "karthik",

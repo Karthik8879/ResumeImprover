@@ -10,6 +10,15 @@ export async function loadSettings(): Promise<ExtensionSettings> {
   if (!merged.resumeProfile) {
     merged.resumeProfile = DEFAULT_SETTINGS.resumeProfile;
   }
+  // Older defaults: specific :free Qwen endpoints are often removed; use OpenRouter’s free router
+  const migrateToFreeRouter = [
+    "qwen/qwen2.5-7b-instruct:free",
+    "qwen/qwen-2.5-7b-instruct:free",
+  ];
+  if (migrateToFreeRouter.includes(merged.openrouterModel)) {
+    merged.openrouterModel = "openrouter/free";
+    await chrome.storage.local.set({ [STORAGE_SETTINGS_KEY]: merged });
+  }
   // Optional dev-only fallback from constants (usually empty)
   if (!merged.openrouterApiKey?.trim() && BUILTIN_OPENROUTER_KEY.trim()) {
     merged.openrouterApiKey = BUILTIN_OPENROUTER_KEY;
