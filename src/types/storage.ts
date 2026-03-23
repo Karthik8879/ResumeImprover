@@ -1,4 +1,3 @@
-import { BUILTIN_OPENROUTER_KEY } from "../constants/builtinOpenRouter";
 import type { JobAnalysis } from "./analysis";
 
 export type AiProvider = "openai" | "anthropic" | "openrouter";
@@ -33,7 +32,7 @@ export const DEFAULT_SETTINGS: ExtensionSettings = {
   openaiModel: "gpt-4o-mini",
   anthropicApiKey: "",
   anthropicModel: "claude-3-5-sonnet-20241022",
-  openrouterApiKey: BUILTIN_OPENROUTER_KEY,
+  openrouterApiKey: "",
   // Default to a Qwen free-tier slug; browse https://openrouter.ai/models?q=free for current IDs
   openrouterModel: "qwen/qwen2.5-7b-instruct:free",
   defaultResumeText: "",

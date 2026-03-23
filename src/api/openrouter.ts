@@ -50,6 +50,18 @@ export async function analyzeWithOpenRouter(params: {
       signal,
     });
 
+  const explainOpenRouterFailure = (status: number, bodySnippet: string): string => {
+    if (status === 401) {
+      return (
+        "OpenRouter returned 401 (User not found / invalid key). " +
+        "Sign in at https://openrouter.ai , open https://openrouter.ai/keys , create a new API key, " +
+        "paste it into the extension under “OpenRouter API key”, then try Analyze again. " +
+        "If you pasted an old or leaked key, revoke it on the Keys page."
+      );
+    }
+    return `OpenRouter HTTP ${status}: ${bodySnippet.slice(0, 220)}`;
+  };
+
   let res = await post({
     model: model.trim(),
     messages,
@@ -59,7 +71,11 @@ export async function analyzeWithOpenRouter(params: {
 
   if (!res.ok) {
     const errFirst = await res.text().catch(() => "");
-    // Many free-tier models still return JSON in text; retry without json_object constraint
+    // Wrong or revoked key — retrying with the same key will not help
+    if (res.status === 401) {
+      throw new Error(explainOpenRouterFailure(401, errFirst));
+    }
+    // Many free-tier models reject json_object; retry without it
     res = await post({
       model: model.trim(),
       messages,
@@ -67,6 +83,9 @@ export async function analyzeWithOpenRouter(params: {
     });
     if (!res.ok) {
       const errSecond = await res.text().catch(() => "");
+      if (res.status === 401) {
+        throw new Error(explainOpenRouterFailure(401, errSecond));
+      }
       throw new Error(
         `OpenRouter error: ${errFirst.slice(0, 180)}${errSecond ? ` | retry: ${errSecond.slice(0, 180)}` : ""}`
       );

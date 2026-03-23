@@ -7,12 +7,12 @@ export async function loadSettings(): Promise<ExtensionSettings> {
   const bag = await chrome.storage.local.get(STORAGE_SETTINGS_KEY);
   const raw = bag[STORAGE_SETTINGS_KEY] as Partial<ExtensionSettings> | undefined;
   const merged: ExtensionSettings = { ...DEFAULT_SETTINGS, ...raw };
-  // Saved "" would override built-in OpenRouter key; treat empty as "use default key"
-  if (!merged.openrouterApiKey?.trim()) {
-    merged.openrouterApiKey = BUILTIN_OPENROUTER_KEY;
-  }
   if (!merged.resumeProfile) {
     merged.resumeProfile = DEFAULT_SETTINGS.resumeProfile;
+  }
+  // Optional dev-only fallback from constants (usually empty)
+  if (!merged.openrouterApiKey?.trim() && BUILTIN_OPENROUTER_KEY.trim()) {
+    merged.openrouterApiKey = BUILTIN_OPENROUTER_KEY;
   }
   return merged;
 }
